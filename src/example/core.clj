@@ -4,13 +4,16 @@
   examples macro and run show-examples in the REPL. Can
   also be used to generate unit tests."
   (:use [stch.glob :only [match-glob]]
-        [example.data :only [all-examples]])
+        [example.data :only [all-examples]]
+        [example.util :only [sum init-ns-examples]]
+        [example padding wrapping]
+        [example.generate :only [gen-ex-str]])
   (:require [clojure.string :as string]
             [example.colors :as color]
-            [example.protocols :as proto])
+            [example.protocols :as proto :refer [printt counte printd printe]])
   (:import [clojure.lang Keyword Symbol ISeq IPersistentSet
             IPersistentVector APersistentMap Sequential IRecord]
-           [example.types Example DescribeBlock]))
+           [example.types Example DescribeBlock ThrownException]))
 
 (def ^{:dynamic true :private true} *outer-container* true)
 
@@ -30,13 +33,13 @@
 (extend-type DescribeBlock
   proto/Printable
   (printe [this]
-    (println (color/cyan (pad-left description)))
-    (doseq [f body]
+    (println (color/cyan (pad-left (.description this))))
+    (doseq [f (.body this)]
       (with-inc-padding 2
         (printe f))))
 
   proto/Countable
-  (counte [this] (sum (map counte body))))
+  (counte [this] (sum (map counte (.body this)))))
 
 (defmacro with-inner-container
   [& body]
@@ -232,25 +235,3 @@
   (printd [this] (symbol (.getName this)))
   Object
   (printd [this] (str "FIX-ME: " (pr-str this))))
-
-(comment
-  (ex (map inc (range 5)))
-  (ex (first '[a b c]))
-  (ex (keys {:a 1 'b 2 "c" 3}))
-  (ex (= true true))
-  (ex (= 1.0 nil))
-  (ex (assoc {:a 1} :b ["David" :Billy]))
-  (ex (conj #{:a} :b))
-  (ex (get {:a 1} :b))
-  (ex "Literals"
-      #inst "2014-01-01"
-      #uuid "381877aa-02e4-4bd0-8d7a-f03b88889f6a")
-  (ex (create-ns 'my-ns))
-  (ex (zipmap (range 15) (range 15))))
-
-(comment
-  (import org.joda.time.LocalDate)
-
-  (extend-protocol rk.example/Printable
-    LocalDate
-    (printd [this] (list 'LocalDate. (.toString this)))))

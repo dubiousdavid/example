@@ -1,6 +1,6 @@
 (ns example.padding)
 
-(def ^{:dynamic true :private true} *padding* 0)
+(def ^{:dynamic true} *padding* 0)
 
 (defmacro with-inc-padding
   "Increase padding by n in the scope of body."

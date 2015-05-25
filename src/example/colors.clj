@@ -1,4 +1,4 @@
-(ns rk.example.colors)
+(ns example.colors)
 
 (def ^{:dynamic true :private true} *color-on* true)
 

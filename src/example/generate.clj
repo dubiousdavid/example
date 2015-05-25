@@ -1,5 +1,38 @@
 (ns example.generate
+  (:require [clojure.string :as string]
+            [clojure.java.io :as io]
+            [example.colors :as color])
+  (:use [example padding wrapping]
+        [clojure.pprint :only [pprint]])
   (:import java.io.StringWriter example.types.ThrownException))
+
+(defn mk-ns-ref
+  [type refs]
+  (when (seq refs) (list* type refs)))
+
+(defn parse-ns
+  [ref]
+  (if (sequential? ref) (first ref) ref))
+
+(defn split-ns
+  [ns]
+  (string/split (name ns) #"\."))
+
+(defn append-last
+  [v s]
+  (update-in v [(- (count v) 1)] str s))
+
+(defn dash->underscore
+  [s]
+  (string/replace s "-" "_"))
+
+(defn conj-ns-ref
+  "Conj a namespace ref, if it does not already exist."
+  [refs ref]
+  (let [namespaces (set (map parse-ns refs))]
+    (if-not (namespaces (parse-ns ref))
+      (conj refs ref)
+      refs)))
 
 (defn mk-ns-dec
   [library-ns test-ns ns {:keys [import require use] :or {use []}}]

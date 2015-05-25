@@ -1,8 +1,12 @@
 (ns example.tests.midje
-  (:use [example.util :only [mk-ns-dec]]
-        [example.data :only [all-examples]])
+  (:use [example.generate :only [mk-ns-dec mk-test-ns mk-out-file call-fn pp-str]]
+        [example.data :only [all-examples]]
+        [example.util :only [mapply confirm nl]]
+        [example padding wrapping])
   (:require [clojure.string :as string]
-            [example.protocols :as proto])
+            [example.protocols :as proto :refer [printt counte printd]]
+            [example.colors :as color :refer [with-color-off]]
+            [clojure.java.io :as io])
   (:import [example.types Example DescribeBlock]))
 
 (defn mk-testable-privates
@@ -94,11 +98,11 @@
   proto/Printable
   (printt [this]
     (let [contents (with-inc-padding 2
-                     (->> body
+                     (->> (.body this)
                           (map printt)
                           (map pad-left)
                           (string/join \newline)))]
-      (str "(facts " (nl (color/cyan (pr-str description))) contents ")"))))
+      (str "(facts " (nl (color/cyan (pr-str (.description this)))) contents ")"))))
 
 (extend-type Example
   proto/Printable

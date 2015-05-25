@@ -1,6 +1,6 @@
 (ns example.wrapping)
 
-(def ^{:dynamic true :private true} *wrap-threshold* 80)
+(def ^{:dynamic true} *wrap-threshold* 80)
 
 (defn should-wrap?
   [cnt]
