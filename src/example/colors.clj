@@ -1,6 +1,6 @@
 (ns example.colors)
 
-(def ^{:dynamic true :private true} *color-on* true)
+(def ^{:dynamic true} *color-on* true)
 
 (defmacro with-color-off
   "Turn color off when printing examples/facts."
