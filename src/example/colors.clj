@@ -9,7 +9,9 @@
      ~@body))
 
 (defn colorize [ansi s]
-  (str "\u001B[" ansi "m" s "\u001B[0m"))
+  (if *color-on*
+    (str "\u001B[" ansi "m" s "\u001B[0m")
+    s))
 
 (def bold (partial colorize 1))
 (def red (partial colorize 31))
