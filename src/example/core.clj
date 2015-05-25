@@ -10,7 +10,8 @@
         [example.generate :only [gen-ex-str]])
   (:require [clojure.string :as string]
             [example.colors :as color]
-            [example.protocols :as proto :refer [printt counte printd printe]])
+            [example.protocols :as proto :refer [printt counte printd printe]]
+            example.types)
   (:import [clojure.lang Keyword Symbol ISeq IPersistentSet
             IPersistentVector APersistentMap Sequential IRecord]
            [example.types Example DescribeBlock ThrownException]))

@@ -1,7 +1,8 @@
 (ns example.generate
   (:require [clojure.string :as string]
             [clojure.java.io :as io]
-            [example.colors :as color])
+            [example.colors :as color]
+            example.types)
   (:use [example padding wrapping]
         [clojure.pprint :only [pprint]])
   (:import java.io.StringWriter example.types.ThrownException))

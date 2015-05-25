@@ -6,7 +6,8 @@
   (:require [clojure.string :as string]
             [example.protocols :as proto :refer [printt counte printd]]
             [example.colors :as color :refer [with-color-off]]
-            [clojure.java.io :as io])
+            [clojure.java.io :as io]
+            example.types)
   (:import [example.types Example DescribeBlock]))
 
 (defn mk-testable-privates
