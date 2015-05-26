@@ -1,5 +1,4 @@
-(ns example.util
-  (:require [clojure.string :as string]))
+(ns example.util)
 
 (defn sum [xs]
   (reduce + 0 xs))

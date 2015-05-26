@@ -1,8 +1,8 @@
 (ns example.core
   "An alternative to adding example fn calls in comment blocks.
-  Simply wrap an example fn call in a call to the example or
-  examples macro and run show-examples in the REPL. Can
-  also be used to generate unit tests."
+  Simply wrap an example fn call in a call to the ex or
+  describe macro and run shex in the REPL. Can also be used to
+  generate unit tests. See example.tests.midje."
   (:use [stch.glob :only [match-glob]]
         [example.data :only [all-examples]]
         [example.util :only [sum init-ns-examples]]
@@ -85,8 +85,8 @@
   `(Example. '~form (fn [] ~form)))
 
 (defmacro example
-  "Pass a form unquoted. Form will not be called
-  unless show-examples is called."
+  "Pass a form unquoted. Form will not be called unless
+  show-examples is called."
   [form]
   `(do
      (add-example! ~(example* form))))
@@ -125,9 +125,8 @@
   (println))
 
 (defn shex
-  "Show all the examples for all namespaces, or
-  optionally pass a single namespace and one or more
-  descriptions."
+  "Show all the examples for all namespaces, or optionally
+  pass a single namespace and one or more descriptions."
   ([]
      (when (-> @all-examples vals flatten seq)
        (println)
@@ -152,7 +151,7 @@
 
 (defn shex*
   "Given a glob pattern, show all examples for matching
-  namespaces."
+  namespaces. Use shex#."
   [pattern]
   (let [matches (for [ns-sym (keys @all-examples)
                       :when (match-glob pattern (str ns-sym))]
@@ -184,8 +183,8 @@
   nil)
 
 (defn rex
-  "Reload all examples for the given namespace.
-  Optionally pass one or more descriptions."
+  "Reload all examples for the given namespace. Optionally
+  pass one or more descriptions."
   ([ns-sym]
      (unex ns-sym)
      (require :reload ns-sym)
