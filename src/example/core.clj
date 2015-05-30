@@ -194,6 +194,10 @@
      (require :reload ns-sym)
      (apply shex ns-sym descs)))
 
+(extend-protocol proto/Testable
+  ISeq
+  (printt [this] (string/join \newline (map printt this))))
+
 (extend-protocol proto/Printable
   nil
   (printd [this] this)
@@ -209,7 +213,6 @@
   (printd [this] (symbol (str \' this)))
   ISeq
   (printe [this] (doseq [e this] (printe e)))
-  (printt [this] (string/join \newline (map printt this)))
   (printd [this] (cons 'list (map printd this)))
   IRecord
   (printd [this]

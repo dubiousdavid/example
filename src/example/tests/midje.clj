@@ -95,16 +95,15 @@
                      (with-padding 0 (pp-str result)))]
     (str "(fact " (color/magenta assertion-str) " =>" (wrap-or-space cnt) result-str ")")))
 
-(extend-type DescribeBlock
-  proto/Printable
+(extend-protocol proto/Testable
+  DescribeBlock
   (printt [this]
     (let [contents (with-inc-padding 2
                      (->> (.body this)
                           (map printt)
                           (map pad-left)
                           (string/join \newline)))]
-      (str "(facts " (nl (color/cyan (pr-str (.description this)))) contents ")"))))
+      (str "(facts " (nl (color/cyan (pr-str (.description this)))) contents ")")))
 
-(extend-type Example
-  proto/Printable
+  Example
   (printt [this] (gen-fact this)))
