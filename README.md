@@ -54,16 +54,20 @@ In the REPL:
 (shex 'my-ns)
 ; or
 (shex# my*)
-; my-ns
-;------
-;(append "Hello " "World") => "Hello World"
+
+;; (ns my-ns)
+;; (append "Hello " "World") => "Hello World"
+;; (append "Age: " 36) => "Age: 36"
 ```
 
 You can also do the following:
 
 ```clojure
-(unex 'my-ns)
+;; Reload namespace and display examples
 (rex 'my-ns)
+;; Unload namespace examples
+(unex 'my-ns)
+;; Clear examples from all namespaces
 (cex)
 ```
 
@@ -72,10 +76,17 @@ When you’re ready to create tests (e.g., Midje), run one of the following:
 ```clojure
 (use 'example.tests.midje)
 
+;; Preview the unit tests
 (gen-facts 'my-ns)
-(gen-facts-file 'my-ns
-(gen-unit 'my-ns)
-(gen-unit-file 'my-ns)
+;; (ns my-ns-test
+;;   (:use midje.sweet my-ns))
+
+;; (fact (append "Hello " "World") => "Hello World")
+;; (fact (append "Age: " 36) => "Age: 36")
+
+;; Generate the unit tests
+(gen-facts-file 'my-ns)
+;; 2 test(s) will be generated. Are you sure? (y/N)
 ```
 
 You can extend the Printable protocol, so that types example doesn't know about will be printed properly.
