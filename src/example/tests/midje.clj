@@ -1,4 +1,5 @@
 (ns example.tests.midje
+  "Generate midje facts from examples."
   (:use [example.generate :only [mk-ns-dec mk-test-ns mk-out-file call-fn pp-str]]
         [example.data :only [all-examples]]
         [example.util :only [mapply confirm nl]]
