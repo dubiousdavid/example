@@ -7,7 +7,7 @@ An alternative to adding example fn calls in comment blocks. Simply wrap an exam
 Add the following to your repl profile in ~/.lein/profiles.clj.
 
 ```clojure
-[com.2tothe8th "0.5.0+repl"]
+[com.2tothe8th/example "0.5.0+repl"]
 ```
 
 ## API Documentation
