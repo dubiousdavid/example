@@ -1,6 +1,6 @@
 # example
 
-An alternative to adding example fn calls in comment blocks. Simply wrap an example fn call in a call to the example macro and run `shex` in the REPL. See [example-prod](https://github.com/dubiousdavid/example-prod) for notes on using in production.
+An alternative to adding example fn calls in comment blocks. Simply wrap an example fn call in a call to the example macro and run `shex` in the REPL. See [example-prod](https://github.com/dubiousdavid/example-prod) for notes on how to turn calls to `ex` and `describe` to comment blocks for use in production.
 
 ## Installation
 
