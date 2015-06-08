@@ -90,7 +90,7 @@ I we need to group more than one set of examples together we can use [describe](
 
 ### Production usage
 
-Now you might be asking yourself "What about production code? Doesn't this hurt performance."  The answer to that problem is to add `[com.2tothe8th/example "0.3.0"]` to your project's primary :dependencies vector. This turns all calls to `ex` and `describe` to comment blocks (i.e, they produce no forms at macro expansion time). This ensures that there is no penalty for having this code inline with your source code.
+Now you might be asking yourself "What about production code? Doesn't this hurt performance."  The answer to that problem is to add `[com.2tothe8th/example "0.4.0"]` to your project's primary :dependencies vector. This turns all calls to `ex` and `describe` to comment blocks (i.e, they produce no forms at macro expansion time). This ensures that there is no penalty for having this code inline with your source code.
 
 ### Printable protocol
 
